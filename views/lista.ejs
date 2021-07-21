@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Listagem</title>
+        <link rel='stylesheet' href='/stylessheet/style.css' />
+    </head>
+    <body>
+        <h1>Pagina de Listagem</h1>
+        <p><% for (item of lista) { %>
+            <%= item.nome %> - <%= item.email %> <br >
+            <% } %>
+        </p>
+    </body>
+</html>
