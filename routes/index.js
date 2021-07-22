@@ -46,7 +46,7 @@ router.get('/edit/:id', function(req, res) {
   })
 });
 
-/* Rota para receber para edição */
+/* Rota para receber dados para edição */
 router.post('/edit/:id', function(req, res) {
   db.query('UPDATE emailcadastrados SET nome = ?, email = ? WHERE id = ?', [req.body.nome, req.body.email, req.params.id], function(erro){
     if(erro){
@@ -54,6 +54,19 @@ router.post('/edit/:id', function(req, res) {
     }
     //res.status(200)
     res.redirect('/listar')
+  })
+});
+
+
+/* Rota para receber dados para exclusão  */
+router.delete('/delete/:id', function(req, res) {
+  db.query('DELETE FROM emailcadastrados WHERE id = ?', [req.params.id], function(erro){
+    if(erro){
+      res.status(200).json('Erro: ' + erro) 
+    } else{
+      res.status(200).send('OK');
+    }
+  
   })
 });
 
