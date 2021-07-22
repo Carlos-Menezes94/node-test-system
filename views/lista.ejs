@@ -6,9 +6,24 @@
     </head>
     <body>
         <h1>Pagina de Listagem</h1>
-        <p><% for (item of lista) { %>
-            <%= item.nome %> - <%= item.email %> <br >
+        <table border='1'>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for (item of lista) { %>
+                <tr>
+                    <td><%= item.nome %></td>
+                    <td><%= item.email %></td>
+                </tr> 
+                
             <% } %>
-        </p>
+            </tbody>
+        </table>
+        <p><a href='/'>Voltar para o inicio</a></p>
+   
     </body>
 </html>

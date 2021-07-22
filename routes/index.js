@@ -4,19 +4,14 @@ var db = require('../util/db')
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Test-System', data : new Date() });
+  res.render('index');
 });
 
-router.get('/mensagem', function(req, res) {
-  res.render('mensagem', { mensagem: 'Voce acessou a rota mensagem' });
-})
 
-router.get('/mensagem2', function(req, res) {
-  res.render('index', { title: 'Oi, voce acesou a rota view mensagem2' });
-})
 
+/* Listagem de email armazenada no database */
 router.get('/listar', function(req, res) {
-  db.query('SELECT * FROM emailcadastrados',[],function(erro,resultado){
+  db.query('SELECT * FROM emailcadastrados ORDER BY nome',[],function(erro,resultado){
     if(erro){
       res.status(200).send(erro)
     }
