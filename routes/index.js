@@ -19,4 +19,20 @@ router.get('/listar', function(req, res) {
   })
 })
 
+/* Rota de cadastro de nome/email */
+router.get('/add', function(req, res) {
+  res.render('form');
+});
+
+
+/* Rota de recebimento de dados de nome/email */
+router.post('/add', function(req, res) {
+  db.query('INSERT INTO emailcadastrados(nome, email) VALUES (?,?)', [req.body.nome, req.body.email], function(erro){
+    if(erro){
+      res.status(200).send('Erro: ' + erro)
+    }
+    res.redirect('/listar')
+  })
+});
+
 module.exports = router;
