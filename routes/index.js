@@ -21,7 +21,7 @@ router.get('/listar', function(req, res) {
 
 /* Rota de cadastro de nome/email */
 router.get('/add', function(req, res) {
-  res.render('form');
+  res.render('form', {usuario : {}});
 });
 
 
@@ -31,6 +31,28 @@ router.post('/add', function(req, res) {
     if(erro){
       res.status(200).send('Erro: ' + erro)
     }
+    res.redirect('/listar')
+  })
+});
+
+/* Rota para buscar para edição */
+router.get('/edit/:id', function(req, res) {
+  db.query('SELECT * FROM emailcadastrados WHERE id = ?', [req.params.id], function(erro, resultado){
+    if(erro){
+      res.status(200).send('Erro: ' + erro) 
+    }
+    //res.status(200)
+    res.render('form', {usuario : resultado[0]})
+  })
+});
+
+/* Rota para receber para edição */
+router.post('/edit/:id', function(req, res) {
+  db.query('UPDATE emailcadastrados SET nome = ?, email = ? WHERE id = ?', [req.body.nome, req.body.email, req.params.id], function(erro){
+    if(erro){
+      res.status(200).send('Erro: ' + erro) 
+    }
+    //res.status(200)
     res.redirect('/listar')
   })
 });
